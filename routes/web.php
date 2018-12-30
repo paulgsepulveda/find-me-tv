@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Web\AppController@index');
+Route::get('/personal', 'Web\AppController@personal')->middleware('auth');
+
+Route::get('/login', 'Web\LoginController@index')->name('login')->middleware('guest');
+Route::get('/login/{social}', 'Web\LoginController@redirect' )->middleware('guest');
+Route::get('/login/{social}/callback', 'Web\LoginController@callback' )->middleware('guest');
