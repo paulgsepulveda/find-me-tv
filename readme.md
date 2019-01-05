@@ -38,12 +38,22 @@ Project goal: to create a mashup of the best features of Criticker and Letterbox
 
 ## Models
 
+Confirmed: 
+
 * User
 
 * Review
 
-* 
+Possible:
+
+* Recommendations
 
 ## Mixins
 
 * Authentication
+
+* Filters
+
+* Rating request
+
+* 
