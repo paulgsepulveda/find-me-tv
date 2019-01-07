@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'Web\AppController@index');
-Route::get('/personal', 'Web\AppController@personal')->middleware('auth');
+Route::get('/', 'Web\AppController@index')->middleware('auth');
 
 Route::get('/login', 'Web\LoginController@index')->name('login')->middleware('guest');
 Route::get('/login/{social}', 'Web\LoginController@redirect' )->middleware('guest');

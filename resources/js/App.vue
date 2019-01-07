@@ -1,26 +1,21 @@
 <template>
-  <div id="app">
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <router-link class="navbar-item" to="/">
-          <a class="navbar-item is-size-4">Find Me TV</a> 
-        </router-link>
-
-        <a role="button" v-on:click="clickBurger" v-bind:class="{'is-active': menuActive}" class="navbar-burger" aria-label="menu" aria-expanded="false">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div class="navbar-menu" id="navMenu" v-bind:class="{'is-active': menuActive}">
-        <div class="navbar-end">
-          <router-link class="navbar-item is-size-5" to="/">Home</router-link>
-          <a class="navbar-item is-size-5" href="/#unbreakable">Unbreakable</a>
-          <a class="navbar-item is-size-5" href="/#products">Products</a>
-          <router-link class="navbar-item is-size-5" to="/ideas">Ideas</router-link>
-          <a class="navbar-item is-size-5" href="/#about">About</a>
-        </div>
+  <div>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <router-link class="navbar-brand" to="/">Find Me TV</router-link>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+            <router-link class="nav-link" to="/">Home</router-link>
+          </li>
+          <li>
+            <router-link class="nav-link" to="/discover">Discover</router-link>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -30,20 +25,7 @@
 </template>
 <script>
   export default {
-    data() {
-      return {
-        menuActive: false
-      }
-    },
-    methods: {
-      clickBurger() {
-        if(this.menuActive == false) {
-          this.menuActive = true;
-        } else {
-          this.menuActive = false;
-        }
-      }
-    }
+
   }
 </script>
 

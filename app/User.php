@@ -28,4 +28,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function circle()
+    {
+        $this->hasOne('App\Circle');
+    }
+
+    public function reviews()
+    {
+        $this->hasMany('App\Review');
+    }
 }

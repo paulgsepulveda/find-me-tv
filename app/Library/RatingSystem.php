@@ -8,7 +8,7 @@ use App\Circle;
 
 class RatingSystem {
 
-    protected $reviews;
+    protected $review;
     protected $user;
     protected $circle;
 
@@ -16,6 +16,7 @@ class RatingSystem {
     {
         $this->circle = $circle;
         $this->user = $user;
+        $this->review = $review;
     }
 
     /**
@@ -27,34 +28,38 @@ class RatingSystem {
      */
     public function generateRecommendation(integer $user, $count = 1)
     {
-        $circle = $this->circle->where('user_id', $user)->get();
-        $circle = collect(json_decode($circle));
+        $circleReviews = $this->circle->getCircleReviews($user);
+        $userReviews = $this->user->find($user)->reviews;
     }
 
     public function generateCircle(integer $user)
     {
         $otherUsers = $this->user->where('user_id', '!=', $user)->get('user_id');
-
         $userReviews = $this->review->where('user_id', $user);
-        $userShows = $this->assembleVector 
-        $similarityScore = [];
-        foreach ($otherUsers as $other) {
-            $otherReviews = $this->review->where('user_id', $other);
-            // Show
-            
-            $otherScore[] = $this->cosineSimilarity
+        $similarityScores = $this->getSimilarityScores($userReviews, $otherUsers);
+        $mostSimilar = json_encode($this->rankMostSimilar($similarityScores));
 
-            // Season
-
-
-            // Episode
-        }
+        return $this->createCircle($user, $mostSimilar);
     }
 
-    public function createCircle(integer $user, string $circle) {
-        $this->circle->user_id = $user;
-        $this->circle->circle = $circle;
-        $this->circle->save();
+    /**
+     * 
+     *
+     * @param integer $user - user_id
+     * @param string $circle - JSON string of the user_id's of that user's circle
+     * @return void
+     */
+    public function createCircle(integer $user, string $circle) 
+    {    
+        if ($existing = $this->circle->where('user_id', $user)->get()) {
+            $existing->circle = $circle;
+            $existing->save();
+        } else {
+            $this->circle->user_id = $user;
+            $this->circle->circle = $circle;
+            $this->circle->save();
+        }
+
         return true;
     }
 
@@ -67,7 +72,7 @@ class RatingSystem {
      *
      * @param array $vector1 - The current user's set of ratings
      * @param array $vector2 - The comparison user's set of ratings
-     * @return void
+     * @return float
      */
     public function cosineSimilarity(array $vector1, array $vector2)
     {
@@ -90,27 +95,61 @@ class RatingSystem {
 		return $similarity;
     }
 
-    public function assembleVector($reviews, string $category)
+    public function assembleVector(Collection $reviews, string $category)
     {
         switch ($category) {
             case 'show_id':
-                $filtered = $reviews->where('season_id', null)
-                                    ->get('show_id', 'tier');
+                $filtered = $review->filterForShows($reviews)->only(['show_id', 'tier']);
                 break;
             
             case 'season_id':
-                $filtered = $reviews->where('season_id', '>', 0)
-                                    ->where('episode_id', null)
-                                    ->get('season_id', 'tier');
+                $filtered = $review->filterForSeasons($reviews)->only(['season_id', 'tier']);
                 break;
 
             case 'episode_id':
-                $filtered = $reviews->where('episode_id', '>', 0)
-                                ->get('episode_id', 'tier');
+                $filtered = $review->filterForEpisodes($reviews)->only(['episode_id', 'tier']);
                 break;
         }
 
         return $filtered->toArray();
+    }
+
+    public function getSimilarityScores(Collection $userReviews, Collection $otherUsers)
+    {
+        $userShows = $this->assembleVector($userReviews, 'show_id');
+        $userSeasons = $this->assembleVector($userReviews, 'season_id');
+        $userEpisodes = $this->assembleVector($userReviews, 'episode_id'); 
+        $similarityScore = [];
+        
+        foreach ($otherUsers as $other) {
+            $otherReviews = $this->review->where('user_id', $other);
+            
+            $otherVector = $this->assembleVector($otherReviews, 'show_id');
+            $otherScore[] = $this->cosineSimilarity($userShows, $otherVector);
+
+            $otherVector = $this->assembleVector($otherReviews, 'season_id');
+            $otherScore[] = $this->cosineSimilarity($userSeasons, $otherVector);
+
+            $otherVector = $this->assembleVector($otherReviews, 'episode_id');
+            $otherScore[] = $this->cosineSimilarity($userEpisodes, $otherVector);
+
+            $similarityScore[] = [$other => $otherScore];
+        }
+
+        return $similarityScore;
+    }
+
+    public function rankMostSimilar(array $similarityScores)
+    {
+        $blendedScores = [];
+        foreach ($similarityScores as $id => $scores) {
+            $blendedScores = [ $id => ($scores[0] * 0.80 + $scores[1] * 0.15 + $scores[2] * .05) ];
+        }
+
+        $mostSimilar = array_slice(arsort($blendedScores), 0, 5, true);
+        $mostSimilar = array_keys($mostSimilar);
+
+        return $mostSimilar;
     }
 
     public function estimateRating()
@@ -123,9 +162,7 @@ class RatingSystem {
 
     }
 
-    public function testCircleMembership()
-    {
 
-    }
+
 
 }

@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Ideas from './views/Ideas.vue'
+import Discover from './views/Discover.vue'
+import Show from './views/Show.vue'
+import Season from './views/Season.vue'
+import Episode from './views/Episode.vue'
 
 Vue.use(Router)
 
@@ -15,17 +18,27 @@ export default new Router({
       component: Home
     },
     {
-      path: '/ideas',
-      name: 'ideas',
-      component: Ideas
+      path: '/discover',
+      name: 'discover',
+      component: Discover
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/show/:show',
+      name: 'show',
+      component: Show,
+      props: true
+    },
+    {
+      path: '/show/:show/season/:season',
+      name: 'season',
+      component: Season,
+      props: true
+    },
+    {
+      path: '/show/:show/season/:season/episode/:episode',
+      name: 'episode',
+      component: Episode,
+      props: true
     }
   ]
 })

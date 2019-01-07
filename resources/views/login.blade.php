@@ -7,6 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <p>This is where the awesome pitch goes for joining up.</p>
                 <a href="/login/google">
                     Log In With Google
                 </a>

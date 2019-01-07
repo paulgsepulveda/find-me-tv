@@ -15,6 +15,12 @@ class CreateRecommendationsTable extends Migration
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('show_id');
+            $table->integer('estimated_tier');
+            $table->integer('rs_version');
+            $table->integer('rating_difference')->nullable();
+            $table->integer('dismissed')->nullable();
+            $table->integer('rated')->nullable();
             $table->timestamps();
         });
     }
