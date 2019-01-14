@@ -2,18 +2,15 @@
 
 </style>
 <template>
-
-    <div class="container">
-        <h1>Welcome to the home page, full of home stuff.</h1>
-    </div>
     
 </template>
 <script>
 export default {
     data() {
         return {
-            reviews: ''
+            
         }
     },
+    props: [],
 }
 </script>

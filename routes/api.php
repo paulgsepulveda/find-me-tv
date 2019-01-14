@@ -13,17 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('v1')->middleware('auth:api')->group(function() {
+Route::prefix('v1')->group(function() { //'auth:api'
 
-  Route::get('discover', 'API\ApiController@discoverShow');
-  Route::get('show/{show}', 'API\ApiContoller@getShow');
-  Route::get('show/{show/season/{season}', 'API\ApiController@getSeason');
-  Route::get('show/{show}/season/{season}/episode/{episode}', 'API\ApiController@getEpisode');
+  Route::post('discover', 'ApiController@discoverShow');
+
+  Route::get('show/{show}', 'ApiController@getShow');
+  Route::get('show/{show/season/{season}', 'ApiController@getSeason');
+  Route::get('show/{show}/season/{season}/episode/{episode}', 'ApiController@getEpisode');
   
-  Route::post('create', 'API\ApiController@createReview');
-  Route::post('update', 'API\ApiController@updateReview');
-  Route::post('review', 'API\ApiController@getReview');
-  Route::post('reviews', 'API\ApiController@getReviews');
-  
+  Route::post('create', 'ApiController@createReview');
+  Route::post('update', 'ApiController@updateReview');
+  Route::post('review', 'ApiController@getReview');
+  Route::post('reviews', 'ApiController@getReviews');
+
 });
 

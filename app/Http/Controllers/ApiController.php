@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ class ApiController extends Controller
     protected $recommendation;
     protected $user;
 
-    public function __constructor(
+    public function __construct(
         TMDBApi $tmdb, 
         Review $review, 
         Recommendation $recommendation, 
@@ -30,9 +30,11 @@ class ApiController extends Controller
         $this->user = $user;
     }
 
-    public function getShow(Request $request, $show)
+    public function getShow($show)
     {
-        return response()->json($this->tmdb->getShow($show));
+        $id = (int) $show;
+        $response = $this->tmdb->getShow($id);
+        return $response;
     }
 
     public function getSeason(Request $request, $show, $season)
@@ -45,10 +47,10 @@ class ApiController extends Controller
         return response()->json($this->tmdb->getEpisode($show, $season, $episode));
     }
 
-    public function discoverShow(Request $request)
+    public function discoverShow()
     {
-        $params = $request->query();
-        return response()->json($this->tmdb->discoverShow($params));
+        $response = $this->tmdb->discoverShow();
+        return $response;
     }
 
     public function createReview(Request $request)

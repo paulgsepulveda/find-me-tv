@@ -22,6 +22,11 @@
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17",
         "vue-router": "^3.0.2",
+        "vue-template-compiler": "^2.5.21",
         "vuex": "^3.0.1"
+    },
+    "dependencies": {
+        "bootstrap-vue": "^2.0.0-rc.11",
+        "node-sass": "^4.11.0"
     }
 }

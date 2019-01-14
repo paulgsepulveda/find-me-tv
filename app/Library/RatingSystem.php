@@ -12,7 +12,7 @@ class RatingSystem {
     protected $user;
     protected $circle;
 
-    public function __constructor(Circle $circle, User $user, Review $review)
+    public function __construct(Circle $circle, User $user, Review $review)
     {
         $this->circle = $circle;
         $this->user = $user;
@@ -30,6 +30,10 @@ class RatingSystem {
     {
         $circleReviews = $this->circle->getCircleReviews($user);
         $userReviews = $this->user->find($user)->reviews;
+
+        $circleShowReviews = $this->review->filterForShows($circleReviews);
+        $userShowReviews = $this->review->filterForShows($userReviews);
+
     }
 
     public function generateCircle(integer $user)

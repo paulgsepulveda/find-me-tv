@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', 'Web\AppController@index')->middleware('auth');
+Route::get('/', 'AppController@index');
 
-Route::get('/login', 'Web\LoginController@index')->name('login')->middleware('guest');
-Route::get('/login/{social}', 'Web\LoginController@redirect' )->middleware('guest');
-Route::get('/login/{social}/callback', 'Web\LoginController@callback' )->middleware('guest');
+Route::get('/login', 'LoginController@index')->name('login')->middleware('guest');
+Route::get('/login/{social}', 'LoginController@redirect' )->middleware('guest');
+Route::get('/login/{social}/callback', 'LoginController@callback' )->middleware('guest');
+
+Route::get('{any}', function () {
+    return view('app');
+})->where('any','.*');

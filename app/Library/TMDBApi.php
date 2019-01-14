@@ -10,36 +10,38 @@ class TMDBApi {
 
     public function __construct()
     {
-        $basePath = 'https://api.themoviedb.org/3/';
-        $apiKey = env('TMDB_KEY');
+        $this->basePath = 'https://api.themoviedb.org/3';
+        $this->apiKey = env('TMDB_KEY');
     }
 
     public function sendRequest($endpoint, $params = false)
     {
-        if($params) {
-            array_push($params,['api_key' => $this->apiKey]);
+        $query = $params;
+        if($query) {
+            $query= $query + ['api_key' => $this->apiKey];
         } else {
-            $params = ['api_key' => $this->apiKey];
+            $query = ['api_key' => $this->apiKey];
         }
 
-        try {
-            $client = new GuzzleHttp\Client(['base_uri' => $this->basePath]);
-            $res = $client->request('GET', $endpoint, $params);
-            return $res->getBody();
-        } catch (\Throwable $th) {
-            
-        }
+        $client = new GuzzleHttp\Client();
+        $res = $client->request('GET', $this->basePath . $endpoint, [
+            'verify' => false,
+            'query' => $query
+        ]);
+        return $res->getBody();
     }
 
-    public function getShow(integer $show, $params = false)
+    public function getShow(int $show, $params = false)
     {
+        $endpoint = "/tv/{$show}";
+
         if($params) {
-            $endpoint = "tv/{$show}";
-            return $this->sendRequest($endpoint, $params);
+            $params = $params + ['append_to_response' => 'credits'];
         } else {
-            $endpoint = "tv/{$show}";
-            return $this->sendRequest($endpoint);
+            $params = ['append_to_response' => 'credits'];
         }
+
+        return $this->sendRequest($endpoint, $params);
     }
 
     public function getSeason(integer $show, integer $season, $params = false)
@@ -64,7 +66,7 @@ class TMDBApi {
         }
     }
 
-    public function discoverShow($params)
+    public function discoverShow($params = null)
     {
         $endpoint = '/discover/tv';
         return $this->sendRequest($endpoint, $params);
