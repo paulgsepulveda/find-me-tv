@@ -1,0 +1,90 @@
+/**
+
+NEW CLASSES
+
+*/
+
+.section-heading {
+
+    border-bottom: $border-width solid $global-font-color;
+    padding-bottom: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.loadingOverlay {
+    background-color: rgb(20, 24, 28);
+    position: fixed;
+    width:100%;
+    height: 100%;
+    z-index: 100;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+/**
+
+BOOTSTRAP CUSTOM STYLES
+
+*/
+
+// Badge
+
+.badge {
+    margin:0.1rem;
+    // display: inline-block;
+    // padding: $badge-padding-y $badge-padding-x;
+    // font-size: $badge-font-size;
+    // font-weight: $badge-font-weight;
+    // line-height: 1;
+    // text-align: center;
+    // white-space: nowrap;
+    // vertical-align: baseline;
+    // @include border-radius($badge-border-radius);
+  
+}
+
+// Tabs
+
+.nav-tabs {
+    border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
+    margin-bottom: -1;
+    text-transform: uppercase;
+  
+    .nav-item {
+      
+    }
+  
+    .nav-link {
+      // border: $nav-tabs-border-width solid transparent;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
+      margin-bottom: 1;
+      
+      @include border-top-radius($nav-tabs-border-radius);
+  
+      @include hover-focus {
+        border-color: $nav-tabs-link-hover-border-color;
+      }
+  
+      &.disabled {
+        color: $nav-link-disabled-color;
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+  
+    .nav-link.active,
+    .nav-item.show .nav-link {
+      color: $nav-tabs-link-active-color;
+      background-color: $nav-tabs-link-active-bg;
+      border-color: $nav-tabs-link-active-border-color;
+      border-bottom: $nav-tabs-border-width solid $nav-tabs-link-active-border-color;
+    }
+  }
+
+  

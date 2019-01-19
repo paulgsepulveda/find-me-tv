@@ -1,15 +1,20 @@
+$global-bg:  rgb(20, 24, 28);
+$global-font-color: #9ab;
 
 // Body
-$body-bg: #2c3440;
-$body-color: #9ab;
+$body-bg: $global-bg;
+$body-color: $global-font-color;
 
 // Typography
-$font-family-sans-serif: "Nunito", sans-serif;
+$font-family-sans-serif: Montserrat, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+$headings-font-family: Merriweather;
+$headings-color: white;
+
 
 // Options
-$enable-gradients: true;
+$enable-gradients: false;
 
 // Colors
 $blue: #3490dc;
@@ -19,12 +24,34 @@ $pink: #f66D9b;
 $red: #e3342f;
 $orange: #f6993f;
 $yellow: #ffed4a;
-$green: #38c172;
+$green: #00BF41;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
 // Links
-// $link-color: theme-color("primary");
+$link-color: $green;
+
+// Badges
+
+$badge-font-size: 80%;
+$badge-font-weight: 500;
+$badge-padding-y: .4em;
+$badge-padding-x: .5em;
+
+// Navs
+
+$nav-tabs-border-color: $global-font-color;
+$nav-link-padding-x: 1rem;
+$nav-link-padding-y: .25rem;
+$nav-tabs-link-active-border-color: $green;
+$nav-tabs-link-active-color: $green;
+
+// $badge-border-radius:               $border-radius !default;
+
+// $badge-pill-padding-x:              .6em !default;
+// // Use a higher than normal value to ensure completely rounded edges when
+// // customizing padding or font-size on labels.
+// $badge-pill-border-radius:          10rem !default;
 
 // Components
 
@@ -37,9 +64,6 @@ $cyan: #6cb2eb;
 // $transition-fade:             opacity .15s linear !default;
 // $transition-collapse:         height .35s ease !default;
 
-// Fonts
-
-// $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 // $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 // $font-family-base:            $font-family-sans-serif !default;
 
@@ -62,10 +86,10 @@ $cyan: #6cb2eb;
 // $h6-font-size:                $font-size-base !default;
 
 // $headings-margin-bottom:      ($spacer / 2) !default;
-// $headings-font-family:        inherit !default;
+
 // $headings-font-weight:        500 !default;
 // $headings-line-height:        1.2 !default;
-$headings-color: white;
+
 
 // $display1-size:               6rem !default;
 // $display2-size:               5.5rem !default;
@@ -106,11 +130,8 @@ $headings-color: white;
 
 // Navs
 
-// $nav-link-padding-y:                .5rem !default;
-// $nav-link-padding-x:                1rem !default;
 // $nav-link-disabled-color:           $gray-600 !default;
 
-// $nav-tabs-border-color:             $gray-300 !default;
 // $nav-tabs-border-width:             $border-width !default;
 // $nav-tabs-border-radius:            $border-radius !default;
 // $nav-tabs-link-hover-border-color:  $gray-200 $gray-200 $nav-tabs-border-color !default;
@@ -118,9 +139,14 @@ $headings-color: white;
 // $nav-tabs-link-active-bg:           $body-bg !default;
 // $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
 
-// $nav-pills-border-radius:           $border-radius !default;
-// $nav-pills-link-active-color:       $component-active-color !default;
-// $nav-pills-link-active-bg:          $component-active-bg !default;
+// Modals
 
-// $nav-divider-color:                 $gray-200 !default;
-// $nav-divider-margin-y:              ($spacer / 2) !default;
+// Padding applied to the modal body
+// $modal-inner-padding:               1rem !default;
+
+// $modal-dialog-margin:               .5rem !default;
+// $modal-dialog-margin-y-sm-up:       1.75rem !default;
+
+// $modal-title-line-height:           $line-height-base !default;
+
+// $modal-content-bg: $global-bg;

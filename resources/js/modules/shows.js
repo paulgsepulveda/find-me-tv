@@ -33,7 +33,7 @@ export default {
         loadSeason({commit}, data) {
             commit('setSeasonLoadStatus', 1);
 
-            ShowAPI.getSeason(data)
+            ShowAPI.getSeason(data.show, data.season)
                 .then( function(response) {
                     console.log(response.data);
                     commit('setSeason', response.data);

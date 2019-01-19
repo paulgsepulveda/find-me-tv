@@ -36,26 +36,26 @@ class TMDBApi {
         $endpoint = "/tv/{$show}";
 
         if($params) {
-            $params = $params + ['append_to_response' => 'credits'];
+            $params = $params + ['append_to_response' => 'credits,similar'];
         } else {
-            $params = ['append_to_response' => 'credits'];
+            $params = ['append_to_response' => 'credits,similar'];
         }
 
         return $this->sendRequest($endpoint, $params);
     }
 
-    public function getSeason(integer $show, integer $season, $params = false)
+    public function getSeason(int $show, int $season, $params = false)
     {
         if($params) {
-            $endpoint = "tv/{$show}/season/{$season}";
+            $endpoint = "/tv/{$show}/season/{$season}";
             return $this->sendRequest($endpoint, $params);
         } else {
-            $endpoint = "tv/{$show}/season/{$season}";
+            $endpoint = "/tv/{$show}/season/{$season}";
             return $this->sendRequest($endpoint);
         }
     }
 
-    public function getEpisode(integer $show, integer $season, integer $episode, $params = false)
+    public function getEpisode(int $show, int $season, int $episode, $params = false)
     {
         if($params) {
             $endpoint = "tv/{$show}/season/{$season}/episode/{$episode}";

@@ -6,11 +6,11 @@
         <b-tabs>
             <b-tab title="Cast" active>
                 <br>
-                <b-badge v-for="(member, index) in cast" variant="light" :key="index">{{member.name}}</b-badge>
+                <b-badge v-for="(member, index) in cast" variant="secondary" :key="index">{{member.name}}</b-badge>
             </b-tab>
-            <b-tab :title="type" >
+            <b-tab :title="type + 's'" >
                 <br>
-                <router-link v-for="(item, index) in typeData" :key="index" :to="'/show/' + show + '/' + item.id" class="btn btn-secondary">{{item.name}}</router-link>
+                <b-badge v-for="(item, index) in typeData" :key="index" :to="'/show/' + show + '/' + type + '/' + item[type + '_number']" class="btn btn-secondary">{{item.name}}</b-badge>
             </b-tab>
             <!-- <b-tab title="Details">
                 <br>
@@ -34,6 +34,6 @@ export default {
             
         }
     },
-    props: ['name', 'overview', 'cast','type', 'typeData', 'show']
+    props: ['overview', 'cast','type', 'typeData', 'show']
 }
 </script>

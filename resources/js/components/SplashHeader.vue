@@ -11,12 +11,10 @@
 
         .splash-background {
             background-position: center 0px;
-            opacity: 1;
             // transition: opacity .75s cubic-bezier(.165,.84,.44,1);
-            transition: opacity .75s ease-out;
-            -moz-transition: opacity .75s ease-out;
-            -webkit-transition: opacity .75s ease-out;
-            position: absolute;
+            -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1), 80%, rgba(0,0,0,0));
+            box-shadow: 50px 50px 50px 0 rgb(20, 24, 28) inset, -50px -250px 50px 0 rgb(20, 24, 28) inset;
             width: 100%;
             height: 100%;
             background-repeat: no-repeat;

@@ -37,9 +37,12 @@ class ApiController extends Controller
         return $response;
     }
 
-    public function getSeason(Request $request, $show, $season)
+    public function getSeason($show, $season)
     {
-        return response()->json($this->tmdb->getSeason($show, $season));
+        $show = (int) $show;
+        $season = (int) $season;
+        $response = $this->tmdb->getSeason($show, $season);
+        return $response;
     }
 
     public function getEpisode(Request $request, $show, $season, $episode)

@@ -22,11 +22,11 @@ class RatingSystem {
     /**
      * Generate a specified number of new recommendations for the selected user
      *
-     * @param integer $user - user_id value
-     * @param integer $count - number of recommendations to add, defaults to 1
+     * @param int $user - user_id value
+     * @param int $count - number of recommendations to add, defaults to 1
      * @return void
      */
-    public function generateRecommendation(integer $user, $count = 1)
+    public function generateRecommendation(int $user, $count = 1)
     {
         $circleReviews = $this->circle->getCircleReviews($user);
         $userReviews = $this->user->find($user)->reviews;
@@ -36,7 +36,7 @@ class RatingSystem {
 
     }
 
-    public function generateCircle(integer $user)
+    public function generateCircle(int $user)
     {
         $otherUsers = $this->user->where('user_id', '!=', $user)->get('user_id');
         $userReviews = $this->review->where('user_id', $user);
@@ -49,11 +49,11 @@ class RatingSystem {
     /**
      * 
      *
-     * @param integer $user - user_id
+     * @param int $user - user_id
      * @param string $circle - JSON string of the user_id's of that user's circle
      * @return void
      */
-    public function createCircle(integer $user, string $circle) 
+    public function createCircle(int $user, string $circle) 
     {    
         if ($existing = $this->circle->where('user_id', $user)->get()) {
             $existing->circle = $circle;

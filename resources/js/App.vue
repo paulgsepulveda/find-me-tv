@@ -14,6 +14,9 @@
           <li>
             <router-link class="nav-link" to="/discover">Discover</router-link>
           </li>
+          <li>
+            <login-modal></login-modal>
+          </li>
         </ul>
       </div>
     </nav>
@@ -23,6 +26,7 @@
   </div>
 </template>
 <script>
+  import LoginModal from './components/LoginModal.vue'
   export default {
     created(){
       // this.$store.dispatch('loadDiscovery');
@@ -34,6 +38,9 @@
         return check;
       }
     },
+    components: {
+      'login-modal': LoginModal
+    }
   }
 </script>
 
