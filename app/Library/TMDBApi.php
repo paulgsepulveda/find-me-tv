@@ -58,10 +58,10 @@ class TMDBApi {
     public function getEpisode(int $show, int $season, int $episode, $params = false)
     {
         if($params) {
-            $endpoint = "tv/{$show}/season/{$season}/episode/{$episode}";
+            $endpoint = "/tv/{$show}/season/{$season}/episode/{$episode}";
             return $this->sendRequest($endpoint, $params);
         } else {
-            $endpoint = "tv/{$show}/season/{$season}/episode/{$episode}";
+            $endpoint = "/tv/{$show}/season/{$season}/episode/{$episode}";
             return $this->sendRequest($endpoint);
         }
     }
@@ -72,6 +72,14 @@ class TMDBApi {
         return $this->sendRequest($endpoint, $params);
     }
 
-
+    public function search($query, $page)
+    {
+        $endpoint = '/search/tv';
+        $params = [
+            'query' => $query,
+            'page' => $page
+        ];
+        return $this->sendRequest($endpoint, $params);
+    }
 
 }

@@ -47,7 +47,7 @@ class ApiController extends Controller
 
     public function getEpisode(Request $request, $show, $season, $episode)
     {
-        return response()->json($this->tmdb->getEpisode($show, $season, $episode));
+        return $this->tmdb->getEpisode($show, $season, $episode);
     }
 
     public function discoverShow()
@@ -97,5 +97,12 @@ class ApiController extends Controller
     public function getReviews(Request $request)
     {
         return response()->json($this->user->find(Auth::user()->id)->reviews);
+    }
+
+    public function search(Request $request) 
+    {
+        $query = urlencode($request->input('search'));
+        $response = $this->tmdb->search($query, $request->input('page'));
+        return $response;
     }
 }

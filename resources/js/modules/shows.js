@@ -10,7 +10,9 @@ export default {
         episode: {},
         episodeLoadStatus: 0,
         discovery: {},
-        discoveryLoadStatus: 0
+        discoveryLoadStatus: 0,
+        searchResults: {},
+        searchLoadStatus: 0
     },
 
     actions: {
@@ -49,7 +51,7 @@ export default {
         loadEpisode({commit}, data) {
             commit('setEpisodeLoadStatus', 1);
 
-            ShowAPI.getEpisode(data)
+            ShowAPI.getEpisode(data.show, data.season, data.episode)
                 .then( function(response) {
                     console.log(response);
                     commit('setEpisode', response.data);
@@ -75,6 +77,22 @@ export default {
                     console.log(response);
                     commit('setDiscovery', {});
                     commit('setDiscoveryLoadStatus', 3);
+                });
+        },
+
+        loadSearchResults({commit}, data) {
+            commit('setSearchLoadStatus', 1);
+
+            DiscoverAPI.search(data)
+                .then( function(response) {
+                    console.log(response.data.results);
+                    commit('setSearchResults', response.data.results);
+                    commit('setSearchLoadStatus', 2);
+                })
+                .catch( function (response) {
+                    console.log(response);
+                    commit('setSearchResults', {});
+                    commit('setSearchLoadStatus', 3);
                 });
         }
     },
@@ -110,6 +128,14 @@ export default {
 
         setDiscoveryLoadStatus(state, status) {
             state.discoveryLoadStatus = status;
+        },
+
+        setSearchResults(state, search) {
+            state.searchResults = search;
+        },
+
+        setSearchLoadStatus(state, status) {
+            state.searchLoadStatus = status;
         }
     },
 
@@ -131,6 +157,10 @@ export default {
         },
 
         getEpisode(state) {
+            return state.episode;
+        },
+
+        getEpisodeLoadStatus(state) {
             return state.episodeLoadStatus;
         },
 
@@ -140,6 +170,14 @@ export default {
 
         getDiscoveryLoadStatus(state) {
             return state.discoveryLoadStatus;
+        },
+
+        getSearchResults(state) {
+            return state.searchResults;
+        },
+
+        getSearchLoadStatus(state) {
+            return state.searchLoadStatus;
         }
     }
 }

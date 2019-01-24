@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <router-link class="navbar-brand" to="/">Find Me TV</router-link>
+      <router-link class="navbar-brand" to="/">TV Circle</router-link>
       <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
           aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

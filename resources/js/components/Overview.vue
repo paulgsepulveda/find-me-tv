@@ -1,13 +1,14 @@
 <style lang="scss" scoped>
 h1 {
-    display: inline;
+    // display: inline;
 }
 </style>
 
 <template>
 
     <div class="pb-2">
-        <h1>{{name}}</h1> <span>{{airDate}} {{creator}}</span>
+        <h1>{{name}}</h1> 
+        <p>{{airDate}} {{creator}}</p>
     </div>
 
 </template>

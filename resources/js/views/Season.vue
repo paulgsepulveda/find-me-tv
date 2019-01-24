@@ -32,14 +32,14 @@
 
                         <div class="row">
                             <div class="col-9">
-                                <p>{{showData.overview}}</p>
-
                                 <info-tabs
-                                    :overview="showData.overview"
+                                    :name="seasonData.name"
+                                    :overview="overview"
                                     :cast="showData.credits.cast"
                                     type="episode"
                                     :typeData="seasonData.episodes"
                                     :show="show"
+                                    :season="season"
                                 >
                                 </info-tabs>
                             </div>
@@ -110,31 +110,12 @@ export default {
             return this.$store.getters.getSeason;
         },
 
-        creator() {
-            if (this.showData.created_by.length > 1 ) {
-
-                var creators = 'Created by ';
-                this.showData.created_by.forEach(function(creator) {
-                    creators = creators + creator.name + ' ';
-                });
-                return creators;
-
-            } else if (this.showData.created_by.length > 0 ) {
-
-                var creators = 'Created by ' + this.showData.created_by[0].name;
-                return creators;
-
-            } else {
-                return '';
-            }
-        },
-
         seasonLoadStatus() {
             return this.$store.getters.getSeasonLoadStatus;
         },
 
         reviewData() {
-            var review = this.findReview(this.$store.getters.getReviews, this.showData.id, this.seasonData.season_number);
+            var review = this.findReview(this.$store.getters.getReviews, this.show, this.season);
 
             if (typeof review == 'undefined' || review == false) {
                 review = {
@@ -146,6 +127,15 @@ export default {
             }
             console.log(review);
             return review;
+        },
+
+        overview() {
+            if(this.seasonData.overview) {
+                console.log(this.seasonData.overview);
+                return this.seasonData.overview;
+            } else {
+                return this.showData.overview;
+            }
         }
     },
 

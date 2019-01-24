@@ -17,6 +17,8 @@ Route::prefix('v1')->group(function() { //'auth:api'
 
   Route::post('discover', 'ApiController@discoverShow');
 
+  Route::post('search', 'ApiController@search');
+
   Route::get('show/{show}', 'ApiController@getShow');
   Route::get('show/{show}/season/{season}', 'ApiController@getSeason');
   Route::get('show/{show}/season/{season}/episode/{episode}', 'ApiController@getEpisode');

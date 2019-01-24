@@ -35,7 +35,7 @@ h1 {
 
                         <div class="row">
                             <div class="col-9">
-                                <p>{{showData.overview}}</p>
+                                <!-- <p>{{showData.overview}}</p> -->
 
                                 <info-tabs
                                     :overview="showData.overview"
@@ -98,25 +98,6 @@ export default {
     computed: {
         showData() {
             return this.$store.getters.getShow;
-        },
-
-        creator() {
-            if (this.showData.created_by.length > 1 ) {
-
-                var creators = 'Created by ';
-                this.showData.created_by.forEach(function(creator) {
-                    creators = creators + creator.name + ' ';
-                });
-                return creators;
-
-            } else if (this.showData.created_by.length > 0 ) {
-
-                var creators = 'Created by ' + this.showData.created_by[0].name;
-                return creators;
-
-            } else {
-                return '';
-            }
         },
 
         showLoadStatus() {

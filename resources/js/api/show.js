@@ -11,6 +11,6 @@ export default {
     },
 
     getEpisode: function (show, season, episode) {
-        return axios.get(APP_CONFIG.API_URL + '/show' + show + '/season/' + season + '/episode/' + episode);
+        return axios.get(APP_CONFIG.API_URL + '/show/' + show + '/season/' + season + '/episode/' + episode);
     }
 }

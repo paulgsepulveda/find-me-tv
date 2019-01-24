@@ -1,13 +1,13 @@
 <style lang="scss" scoped>
 .poster {
 
-    border: 0rem;
-
     img {
-
+        
+        // box-shadow: 5px 5px 5px;
+        border-radius: 4px;
         width: 100%;
         height: auto;
-        border-radius: 4px;
+        
 
     }
 }

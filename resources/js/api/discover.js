@@ -13,5 +13,9 @@ export default {
             queryString.push(encodeURIComponent(param) + "=" + encodeURIComponent(params[param]));
           }
         return queryString.join("&");
-      }
+    },
+
+    search: function(params) {
+      return axios.post(APP_CONFIG.API_URL + '/search', params);
+    }
 }
